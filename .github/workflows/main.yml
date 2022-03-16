@@ -1,16 +1,18 @@
-name: Add Labels
+name: Greeting on variable day
+
+on:
+  workflow_dispatch
+
 env:
-  ACC: build
-on: push
+  DAY_OF_WEEK: Monday
 
 jobs:
-  add_labels:
+  greeting_job:
     runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
-        with:
-          labels: |
-            documentation
-            changelog
+      - name: "Say Hello Mona it's Monday"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
