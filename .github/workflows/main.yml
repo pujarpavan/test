@@ -1,5 +1,6 @@
 name: Add Labels
-
+env:
+  ACC: build
 on: push
 
 jobs:
