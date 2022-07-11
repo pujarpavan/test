@@ -4,20 +4,19 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      version:
-        description: 'Version to run tests against'
-        type: text
-        required: true 
+      fileName:
+        type: string
+        description: File Name
+      folderName:
+        type: string
+        description: Folder Name
+      fileName2:
+        type: string
+        description: File Name 2
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,19 +27,29 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access i
 
-      # Runs a single command using the runners shell
+      # Runs download artifact
       - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-      - run: |
-          echo "version: $version"
-        env:
-          version: ${{ github.event.inputs.version }}
+          mkdir files
+          mkdir "files/${{ github.event.inputs.folderName }}"
+      # Runs a set of commands using the runners shell
+      - uses: actions/checkout@v3
+      - name: Run a one-line script2
+        run: |
+          docker pull ${{ github.event.inputs.fileName }}
+          docker save -o "${{ github.event.inputs.fileName2 }}.tar" ${{ github.event.inputs.fileName }}
+          ls -a
+          mv "./${{ github.event.inputs.fileName2 }}.tar" "files/${{ github.event.inputs.folderName }}/"
+      - name: Commit changes
+        run: |
+          git init
+          git lfs install
+          git lfs track "*.tar"
+          git config --global user.email "lalit-ku@hcl.com"
+          git config --global user.name "lalitKumarHCL"
+          git add *.tar
+          git commit -m "aading ${{ github.event.inputs.fileName }}"
+          git branch -M main
+          git push -u -f origin main
