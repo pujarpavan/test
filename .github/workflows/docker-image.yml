@@ -27,9 +27,6 @@ jobs:
       with:
         username: lalitku
         password: Lalit/2698
-    - name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        push: true
-        tags: lalitku/ucv-ext-azure:${{ github.run_number }}
-        
+    - name: Push
+      run: |
+          docker push lalitku/ucv-ext-azure:${{ github.run_number }}
