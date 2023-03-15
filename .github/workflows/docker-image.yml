@@ -16,8 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker pull lalitku/ucv-ext-azure:4.0.2
-        docker tag lalitku/ucv-ext-azure:4.0.2 lalitku/ucv-ext-azure:${{ github.run_number }}
+        docker tag 5ce65d7b0fde lalitku/ucv-ext-azure:${{ github.run_number }}
         docker images
         docker login -u lalitku -p Lalit/2698 https://docker.io
         docker push lalitku/ucv-ext-azure:${{ github.run_number }}
