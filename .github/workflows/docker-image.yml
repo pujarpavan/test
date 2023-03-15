@@ -18,6 +18,7 @@ jobs:
       run: |
         docker pull lalitku/ucv-ext-azure:4.0.2
         docker tag lalitku/ucv-ext-azure:4.0.2 lalitku/ucv-ext-azure:${{ github.run_number }}
+        docker ps
         docker login -u lalitku -p Lalit/2698 https://docker.io
         docker push lalitku/ucv-ext-azure:${{ github.run_number }}
         
