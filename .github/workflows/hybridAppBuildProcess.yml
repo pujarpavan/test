@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker tag 5ce65d7b0fde lalitku/hybrid-comp-image:${{ github.run_number }}
+        docker tag alpine:latest lalitku/hybrid-comp-image:${{ github.run_number }}
         docker images
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
