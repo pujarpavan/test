@@ -36,14 +36,5 @@ jobs:
           docker push lalitku/hybrid-comp-image:${{ github.run_number }}
     - name: Import Component Into UCD
       run: |
-        curl --location --request PUT 'https://10.134.119.198:8443/cli/component/integrate' \
-        --header 'Content-Type: application/json' \
-        --header 'Authorization: Basic YWRtaW46YWRtaW4=' \
-        --data '{
-          "component": "HybridAppComp1",
-          "properties": {
-            "version": ${{ github.run_number }},
-            "description": ""
-          }
-        }'
+        curl --insecure --request PUT 'https://10.134.119.198:8443/cli/component/integrate' --header 'Content-Type: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' --data '{"component": "HybridAppComp1","properties": {"version": ${{ github.run_number }},"description": ""}}'
           
