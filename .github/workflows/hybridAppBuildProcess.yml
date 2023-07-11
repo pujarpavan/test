@@ -1,6 +1,7 @@
 name: Hybrid App Build Process
 
 # Controls when the workflow will run
+runs-on: self-hosted
 on:
   push:
     branches: [ main ]
