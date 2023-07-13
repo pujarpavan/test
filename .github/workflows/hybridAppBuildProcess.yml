@@ -37,8 +37,8 @@ jobs:
     - name: Import Component Into UCD
       run: |
         curl --insecure --request PUT 'https://10.134.119.250:8443/cli/component/integrate' --header 'Content-Type: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' --data '{"component": "PdmComponent","properties": {"version": ${{ github.run_number }},"description": ""}}'
-    - name: Wait for 1 min
-      run: sleep 60
+    - name: Wait for 30s
+      run: sleep 30
     - name: Create Snapshot
       run: |
         curl --insecure --request PUT 'https://10.134.119.250:8443/cli/snapshot/createSnapshot' --header 'Content-Type: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' --data '{"name": ${{ github.run_number }},"application": "PdmApp","description": "Some snapshot","versions": [{"PdmComponent": "${{ github.run_number }}"}]}'
