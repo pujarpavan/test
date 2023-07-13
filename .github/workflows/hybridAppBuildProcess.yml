@@ -33,7 +33,7 @@ jobs:
         password: Lalit/2698
     - name: Push
       run: |
-          docker push lalitku/hybrid-comp-image:${{ github.run_number }}
+          docker push lalitku/hybrid-launch-artifact:${{ github.run_number }}
     - name: Import Component Into UCD
       run: |
         curl --insecure --request PUT 'https://10.134.119.198:8443/cli/component/integrate' --header 'Content-Type: application/json' --header 'Authorization: Basic YWRtaW46YWRtaW4=' --data '{"component": "PdmComponent","properties": {"version": ${{ github.run_number }},"description": ""}}'
