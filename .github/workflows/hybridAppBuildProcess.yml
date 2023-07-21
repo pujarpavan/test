@@ -19,6 +19,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
+        sudo su 
         docker pull minddocdev/node-alpine:latest
         docker tag minddocdev/node-alpine:latest lalitku/hybrid-launch-artifact:${{ github.run_number }}
         docker images
